@@ -1,0 +1,34 @@
+---
+title: "201 Population Growth Modeling"
+author: "Elmera Azadpour"
+date: "1/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+### Going off of "Logistic Population Growth and Harvesting" handout on GS
+```{r}
+# a function for dN/dt
+calc_dNdt <- function(r, N, K) {r*N*(1-N/K)}  
+
+# some values for r and K (constants)
+r <- 0.5
+K <- 100
+
+# make some dummy data for population sizes
+N <- 0:100
+
+# calculate a dN/dt for each value of N
+dNdt <- calc_dNdt(r=r, N=N, K=K)
+
+# plot the result
+plot(N, dNdt, type = "l", xlab="Population Size, N",ylab="rate of change, dN/dt",
+xaxs="i", yaxs='i',xlim=c(0,110),ylim=c(0,15))
+```
+
+At low population size, dNdt is small (because there are not many
+individuals making more individuals) but rapidly increasing as N increases. The population reaches some maximum growth rate somewhere in the middle, and then again reaches zero at N = K. Why does dNdt = 0 at N = K? Think about the equation for logistic growth above. Let’s label this point.
